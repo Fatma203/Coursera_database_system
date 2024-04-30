@@ -1,0 +1,15 @@
+Declare
+em number;
+Begin
+If :student.email <> '%@gmail.com' then
+em:= show_alert ('alert23');
+If em= 88 then
+	Raise form_trigger_failure;
+Message ('enter valid email');
+Message ('enter valid email');
+elsif em= 89 then
+	Message ('right email');
+	Message ('right email');
+End if;
+End if;
+End;

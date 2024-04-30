@@ -1,0 +1,196 @@
+create table COURSE(
+Course_code Number(10) PRIMARY KEY, 
+Course_Name varchar2(30) Not Null,
+Subject varchar2(50) Not NULL,
+Inst_name varchar2(25) ,
+Duration Number(10),
+Course_Rate Number(10), 
+Price Number(10),
+constraint Inst_fk Foreign key(Inst_name) References  INSTITUTION(Institution_name)
+);
+
+create  table STUDENT (
+Student_Id NUMBER (10)primary key,
+F_name varchar2(25),
+L_name varchar2(25),
+Email varchar2(50),
+Pass varchar2(20) 
+);
+alter table STUDENT 
+add (gender varchar2(10));
+create table INSTITUTION (
+Institution_name varchar2(25) PRIMARY KEY, 
+Institiution_Rate Number(10)
+);
+
+
+create table INSTRUCTOR(
+Instructor_Id Number(10) primary key , 
+First_name varchar2(25),
+Last_name varchar2(25),
+jop_title varchar2(25),
+Institution_name varchar2 (25),
+Instructor_rate number(10)
+);
+
+alter table INSTRUCTOR
+ add foreign key (Institution_name) references INSTITUTION(Institution_name);
+
+create table DEGREE (
+Instructor_Id NUMBER (10), 
+Degrees varchar2(25), 
+primary key (Instructor_Id , Degrees), 
+constraint intractor_id_fk Foreign key (Instructor_Id) references  INSTRUCTOR (Instructor_Id)
+
+);
+
+create table OFFERS(
+Instructor_Id number(10),
+offers_Code number(10),
+constraint Instructor_Id_fk    Foreign key (Instructor_Id) references INSTRUCTOR (Instructor_Id),
+constraint C_code Foreign key (offers_Code) references COURSE (Course_code) 
+);
+
+create table TAKE (
+Student_Id number(10),
+Taken_Code number(10),
+Start_Date Date,
+primary key (Student_Id , Taken_Code),
+constraint Student_Id_fk Foreign key (Student_Id) references STUDENT (Student_Id),
+constraint T_code_fk Foreign key (Taken_Code) references COURSE (Course_code)
+);
+
+--> insert into course table
+
+insert into COURSE(Course_code, course_name, course_rate, duration, inst_name, price,subject)
+values (46544,'digital marketing',4,4,'meta',000,'marketing');
+
+insert into COURSE(Course_code, course_name, course_rate, duration, inst_name, price, subject)
+values (57445,'data analytics',4.5,16,'Google',1500,'DATA SCIENCE');
+
+insert into COURSE(Course_code, course_name, course_rate, duration, inst_name, price,subject) 
+values (45433,'cyber security',5,24,'University of London',4500,'computer science');
+
+insert into COURSE(Course_code, course_name, course_rate, duration, inst_name, price, subject)
+values (54128,'Ai engineering',4.9,24,'IBM',5000,'machin learning');
+
+insert into COURSE(Course_code, course_name, course_rate, duration, inst_name, price, subject)
+values (43322,'learn to speak korean',3.6,6,'Yonsei University',000,'language learning');
+
+--> insert into institution table
+insert into institution(Institution_name, institiution_rate)
+values ('meta',4.7);
+
+insert into institution (Institution_name, institiution_rate  )
+values ('Google',5);
+
+insert into institution (Institution_name , institiution_rate )
+values ('University of London',4.5);
+
+insert into institution (Institution_name , institiution_rate  )
+values ('IBM',5);
+
+insert into institution (Institution_name , institiution_rate  )
+values ('Yonsei University',3.9);
+
+--> insert into student table
+insert into student(Student_Id, f_name, l_name, email, pass)
+values(110,'fatma','mohmed','fatmamohmd386@gmail.com',123);
+
+insert into student(Student_Id, f_name, l_name, email, pass)
+values(120,'menna','hassan','mennahassan101@gmail.com',456);
+
+insert into student(Student_Id, f_name, l_name, email, pass)
+values(130,'hager','ahmed','ahmedhager293@gmail.com',789);
+
+insert into student(Student_Id, f_name, l_name, email, pass)
+values(140,'hager','mahmoud','hajer.192003@gmail.com',1011);
+
+insert into student(Student_Id, f_name, l_name, email, pass)
+values(150,'menna','ibrahiem','mennaibrahiem24@gmail.com',1213);
+
+insert into student(Student_Id, f_name, l_name, email, pass)
+values(160,'maya','mansour','mansourmaya41@gmail.com',1415);
+
+insert into student(Student_Id, f_name, l_name, email, pass)
+values(170,'hana','mohsen','hana12mo21@gmail.com',1617);
+
+--> insert into instructor table
+insert into instructor(Instructor_Id, first_name, last_name,jop_title,Instructor_rate, institution_name)
+values (100,'rachel','lader','team leader',4,'Google');
+
+insert into instructor(Instructor_Id, first_name, last_name,jop_title,Instructor_rate, institution_name)
+values (101,'natalie','henderson','teaching assistant',4.2,'IBM');
+
+insert into instructor(Instructor_Id, first_name, last_name,jop_title,Instructor_rate, institution_name)
+values (102,'gabriela','michel','professor',3.9,'meta');
+
+insert into instructor(Instructor_Id, first_name, last_name,jop_title,Instructor_rate, institution_name)
+values (103,'christopher','millard','professor',5,'University of London');
+
+insert into instructor(Instructor_Id, first_name, last_name,jop_title,Instructor_rate, institution_name)
+values (104,'seung','kang','professor',4.9,'Yonsei University');
+
+--> insert into DEGREE table
+insert into degree (Instructor_Id, degrees)
+values(100,'PHD');
+
+insert into degree (Instructor_Id, degrees)
+values(101,'M.S.C.S');
+
+insert into degree (Instructor_Id, degrees)
+values(102,'PHD');
+
+insert into degree (Instructor_Id, degrees)
+values(103,'PHD');
+
+insert into degree (Instructor_Id, degrees)
+values(104,'MASTER');
+
+--> insert into OFFERS table
+insert into offers (Instructor_Id , offers_code)
+values(100,57445);
+
+insert into offers (Instructor_Id , offers_code)
+values(101,54128);
+
+insert into offers (Instructor_Id , offers_code)
+values(102,46544);
+
+insert into offers (Instructor_Id , offers_code)
+values(103,45433);
+
+insert into offers (Instructor_Id , offers_code)
+values(104,43322);
+
+
+--> insert into take table
+insert into take (Student_Id, taken_code,Start_Date)
+values(110,57445,'01-jun-2022');
+
+insert into take (Student_Id, taken_code,Start_Date)
+values(120,54128,'23-may-2022');
+
+insert into take (Student_Id, taken_code,Start_Date)
+values(130,46544,'02-dec-2022');
+
+insert into take (Student_Id, taken_code,Start_Date)
+values(140,45433,'20-nov-2022');
+
+insert into take (Student_Id, taken_code,Start_Date)
+values(150,43322,'24-jul-2022');
+
+insert into take (Student_Id,taken_code,Start_Date)
+values(160,54128,'17-mar-2022');
+
+insert into take (Student_Id, taken_code,Start_Date)
+values(170,57445,'12-jun-2022');
+ 
+
+
+
+
+
+
+
+
